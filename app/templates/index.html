@@ -1,2 +1,8 @@
 {% extends 'base.html'%}
 <title>{% block title%} Tasha's Blog {%endblock%}</title>
+<!-- Styles block -->
+
+{% block styles%}
+
+<link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+{%endblock%}
