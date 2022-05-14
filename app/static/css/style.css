@@ -2,9 +2,11 @@
 
 body{
     font-family: 'Macondo', cursive;
+    background: url('../images/book.jpg');
 }
 
 #myNavbar{
     background-color: #6ABEA7;
-    padding: 70px;
+    padding: 30px;
 }
+   
