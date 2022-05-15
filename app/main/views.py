@@ -1,8 +1,9 @@
-from crypt import methods
 from . import main_blueprint
-from flask import render_template, url_for
-from .forms import LogIn
-
+from flask import render_template, url_for, redirect, request, flash
+from .forms import LogIn, Signup
+from ..model import User
+from flask_login import login_user, logout_user
+from app import db
 
 @main_blueprint.route('/home')
 @main_blueprint.route('/')
@@ -35,4 +36,15 @@ def login():
 
         # flash('Invalid username or Password')
         
-    return render_template('login.html', form=form)          
+    return render_template('login.html', form=form)
+
+@main_blueprint.route("/sign-up", methods=['POST', 'GET'])
+def sign_up():
+    signup_form = Signup()
+    if signup_form.validate_on_submit():
+        user = User(email = signup_form.email.data, username = signup_form.username.data,password = signup_form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash(f'Successfully signed in for {signup_form.username.data}', category='success')
+        return redirect(url_for('main_blueprint.login'))   
+    return render_template("signup.html", form=signup_form)      
