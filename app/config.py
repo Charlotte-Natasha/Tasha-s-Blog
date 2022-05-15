@@ -7,7 +7,7 @@ class Config:
     """"""
     SECRET_KEY = os.getenv('SECRET_KEY')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    API_URL = os.getenv('API_URL')
+    
 
 
 class ProdConfig(Config):

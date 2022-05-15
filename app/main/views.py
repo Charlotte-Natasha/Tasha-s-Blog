@@ -4,6 +4,7 @@ from .forms import LogIn, Signup
 from ..model import User
 from flask_login import login_user, logout_user
 from app import db
+from ..request import get_quotes
 
 @main_blueprint.route('/home')
 @main_blueprint.route('/')
@@ -20,7 +21,8 @@ def about():
 
 @main_blueprint.route('/quotes')
 def quotes():
-    return render_template('quotes.html') 
+    quotes=get_quotes()
+    return render_template('quotes.html', quotes=quotes) 
 
 @main_blueprint.route('/login', methods=['GET', 'POST'] )
 def login():
