@@ -2,11 +2,11 @@ from app import db
 from datetime import datetime
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-from . import login_manager
+# from . import login_manager
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.get(user_id)
+# @login_manager.user_loader
+# def load_user(user_id):
+#     return User.get(user_id)
 
 class User(db.Model,UserMixin):
     __tablename__ = 'users'
@@ -30,4 +30,4 @@ class User(db.Model,UserMixin):
 
     
     def __repr__(self): 
-        return f'{self.username}: {self.email}: {self.date_created}'      
+        return f'{self.username}: {self.email}'      

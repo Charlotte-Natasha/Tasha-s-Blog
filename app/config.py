@@ -14,7 +14,7 @@ class ProdConfig(Config):
     
 class DevConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI ')
+    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
 
 config_options = {
     'prod':ProdConfig, 
