@@ -1,3 +1,4 @@
+from crypt import methods
 from . import main_blueprint
 from flask import render_template, url_for
 from .forms import LogIn
@@ -20,7 +21,7 @@ def about():
 # def quotes():
 #     return render_template('quotes.html') 
 
-@main_blueprint.route('/login')
+@main_blueprint.route('/login', methods=['GET', 'POST'] )
 def login():
     form=LogIn()
     # if form.validate_on_submit():
