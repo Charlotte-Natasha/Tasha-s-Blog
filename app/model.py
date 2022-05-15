@@ -38,6 +38,7 @@ class Blogs(db.Model,UserMixin):
     id=db.Column(db.Integer,primary_key=True)
     title=db.Column(db.String(255),nullable=False)
     post=db.Column(db.Text())
+    author = db.Column(db.String(255))
     comments=db.relationship('Comment',backref='comments',lazy='dynamic')
     upvote=db.relationship('Upvote',backref='blogs',lazy='dynamic')
     downvote=db.relationship('Downvote',backref='blogs',lazy='dynamic')

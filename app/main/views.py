@@ -1,7 +1,7 @@
 from . import main_blueprint
 from flask import render_template, url_for, redirect, flash, request, abort
-from .forms import LogIn, Signup
-from ..model import User
+from .forms import Blog, LogIn, Signup
+from ..model import Blogs, User
 from flask_login import login_user, logout_user, login_required
 from app import db
 from ..request import get_quotes
@@ -11,9 +11,22 @@ from ..request import get_quotes
 def index():
     return render_template('index.html')
 
-@main_blueprint.route('/blogs')
+@main_blueprint.route('/blogs', methods=['POST', 'GET'])
 def blogs():
-    return render_template('blog.html') 
+    form = Blog()
+    if form.validate_on_submit():
+        post = Blogs(title=form.title.data, content=form.content.data, author=form.author.data)
+        # Clear the form
+        form.title.data=''
+        form.content.data=''
+        form.author.data=''
+        # Add post to database
+        db.session.add(post)
+        db.session.commit()
+
+        flash('Post submitted successfully')
+
+    return render_template('blog.html', form=form) 
 
 @main_blueprint.route('/about')
 def about():
