@@ -1,7 +1,9 @@
 from . import main_blueprint
 from flask import render_template
 
+
 @main_blueprint.route('/home')
+@main_blueprint.route('/')
 def index():
     return render_template('index.html')
 
@@ -13,9 +15,9 @@ def blogs():
 def about():
     return render_template('about.html')       
 
-@main_blueprint.route('/quotes')
-def quotes():
-    return render_template('quotes.html') 
+# @main_blueprint.route('/quotes')
+# def quotes():
+#     return render_template('quotes.html') 
 
 # @main_blueprint.route('/about')
 # def navbar():
