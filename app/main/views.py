@@ -1,8 +1,8 @@
 from . import main_blueprint
-from flask import render_template, url_for, redirect, flash, request
+from flask import render_template, url_for, redirect, flash, request, abort
 from .forms import LogIn, Signup
 from ..model import User
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required
 from app import db
 from ..request import get_quotes
 
@@ -31,7 +31,7 @@ def login():
         user=User.query.filter_by(username = form.username.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user,form.remember.data)
-            return redirect(request.args.get('next') or url_for('main_blueprint.blog'))  
+            return redirect(request.args.get('next') or url_for('main_blueprint.blogs'))  
 
         flash('Invalid username or Password')
         
@@ -47,3 +47,16 @@ def sign_up():
         flash(f'Successfully signed in for {signup_form.username.data}', category='success')
         return redirect(url_for('main_blueprint.login'))   
     return render_template("signup.html", form=signup_form)      
+
+@main_blueprint.route('/profile/<uname>')
+def profile(uname):
+    user = User.query.filter_by(username=uname).first()
+    if user is None:
+        abort(404)
+    return render_template('profile.html', user=user) 
+
+@main_blueprint.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("main_blueprint.index"))
