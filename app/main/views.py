@@ -18,9 +18,9 @@ def blogs():
 def about():
     return render_template('about.html')       
 
-# @main_blueprint.route('/quotes')
-# def quotes():
-#     return render_template('quotes.html') 
+@main_blueprint.route('/quotes')
+def quotes():
+    return render_template('quotes.html') 
 
 @main_blueprint.route('/login', methods=['GET', 'POST'] )
 def login():
