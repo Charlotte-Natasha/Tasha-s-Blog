@@ -1,4 +1,3 @@
-from turtle import title
 from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField,EmailField,SubmitField,BooleanField
 from wtforms.validators import DataRequired,Length,EqualTo,Email
@@ -19,5 +18,5 @@ class LogIn(FlaskForm):
 class Blog(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     content = StringField('Content', validators=[DataRequired()], widget=TextArea())
-    author = StringField('Author', validators=[DataRequired]())
+    author = StringField('Author', validators=[DataRequired()])
     submit = SubmitField(label='submit')    
